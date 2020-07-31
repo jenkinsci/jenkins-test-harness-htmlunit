@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.jenkins-ci</groupId>
     <artifactId>jenkins</artifactId>
-    <version>1.36</version>
+    <version>1.57</version>
   </parent>
 
   <!-- Version number [htmlunit-version]-[this artifact iteration for that version] -->
