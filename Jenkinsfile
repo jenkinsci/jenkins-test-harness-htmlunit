@@ -1,15 +1,5 @@
-pipeline {
-    agent { label 'linux' }
-
-    stages {
-        stage('Build') {
-            tools {
-                maven 'mvn'
-                jdk 'jdk8'
-            }
-            steps {
-                sh 'mvn -B clean install'
-            }
-        }
-    }
+node('maven') {
+    sh 'mvn -B -Dset.changelist clean install'
+    infra.prepareToPublishIncrementals()
 }
+infra.maybePublishIncrementals()
