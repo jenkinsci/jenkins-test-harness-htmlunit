@@ -1,3 +1,1 @@
 _extends: .github
-tag-template: jenkins-test-harness-htmlunit-$NEXT_MAJOR_VERSION
-version-template: $MAJOR
