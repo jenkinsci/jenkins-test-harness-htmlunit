@@ -1,6 +1,6 @@
 node('maven') {
     checkout scm
-    sh 'mvn -B -Dset.changelist clean install'
+    sh 'mvn -B -ntp -Dset.changelist clean install'
     infra.prepareToPublishIncrementals()
 }
 infra.maybePublishIncrementals()
