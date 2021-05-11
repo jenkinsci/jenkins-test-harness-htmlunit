@@ -10,7 +10,7 @@
 
   <groupId>org.jenkins-ci.main</groupId>
   <artifactId>jenkins-test-harness-htmlunit</artifactId>
-  <version>4-SNAPSHOT</version>
+  <version>${changelist}</version>
 
   <name>HtmlUnit dependency for Jenkins Test Harness</name>
   <description>Encapsulates HtmlUnit dependency, shading conflicting dependencies.</description>
@@ -19,10 +19,11 @@
     <connection>scm:git:git://github.com/jenkinsci/${project.artifactId}.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/jenkinsci/${project.artifactId}.git</developerConnection>
     <url>https://github.com/jenkinsci/${project.artifactId}</url>
-    <tag>HEAD</tag>
+    <tag>${scmTag}</tag>
   </scm>
 
   <properties>
+    <changelist>999999-SNAPSHOT</changelist>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.level>8</java.level>
   </properties>
@@ -79,6 +80,10 @@
           <groupId>org.eclipse.jetty</groupId>
           <artifactId>jetty-xml</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>org.eclipse.jetty.websocket</groupId>
+          <artifactId>websocket-client</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
   </dependencies>
@@ -132,6 +137,19 @@
                 </filter>
               </filters>
             </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>flatten-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>flatten</id>
+            <phase>package</phase>
+            <goals>
+              <goal>flatten</goal>
+            </goals>
           </execution>
         </executions>
       </plugin>
