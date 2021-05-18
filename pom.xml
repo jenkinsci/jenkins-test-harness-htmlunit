@@ -136,6 +136,8 @@
                   </excludes>
                 </filter>
               </filters>
+              <createSourcesJar>true</createSourcesJar>
+              <shadeSourcesContent>true</shadeSourcesContent>
             </configuration>
           </execution>
         </executions>
