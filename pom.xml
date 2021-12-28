@@ -16,19 +16,6 @@
   <description>Encapsulates HtmlUnit dependency, shading conflicting dependencies.</description>
   <url>https://github.com/jenkinsci/${project.artifactId}</url>
 
-  <scm>
-    <connection>scm:git:git://github.com/jenkinsci/${project.artifactId}.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/jenkinsci/${project.artifactId}.git</developerConnection>
-    <url>https://github.com/jenkinsci/${project.artifactId}</url>
-    <tag>${scmTag}</tag>
-  </scm>
-
-  <properties>
-    <changelist>999999-SNAPSHOT</changelist>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.level>8</java.level>
-  </properties>
-
   <licenses>
     <!-- Uses HtmlUnit license. -->
     <license>
@@ -37,19 +24,18 @@
     </license>
   </licenses>
 
-  <repositories>
-    <repository>
-      <id>repo.jenkins-ci.org</id>
-      <url>https://repo.jenkins-ci.org/public/</url>
-    </repository>
-  </repositories>
+  <scm>
+    <connection>scm:git:git://github.com/jenkinsci/${project.artifactId}.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/jenkinsci/${project.artifactId}.git</developerConnection>
+    <tag>${scmTag}</tag>
+    <url>https://github.com/jenkinsci/${project.artifactId}</url>
+  </scm>
 
-  <pluginRepositories>
-    <pluginRepository>
-      <id>repo.jenkins-ci.org</id>
-      <url>https://repo.jenkins-ci.org/public/</url>
-    </pluginRepository>
-  </pluginRepositories>
+  <properties>
+    <changelist>999999-SNAPSHOT</changelist>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.level>8</java.level>
+  </properties>
 
   <dependencies>
     <dependency>
@@ -93,6 +79,20 @@
     </dependency>
   </dependencies>
 
+  <repositories>
+    <repository>
+      <id>repo.jenkins-ci.org</id>
+      <url>https://repo.jenkins-ci.org/public/</url>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>repo.jenkins-ci.org</id>
+      <url>https://repo.jenkins-ci.org/public/</url>
+    </pluginRepository>
+  </pluginRepositories>
+
   <build>
     <plugins>
       <plugin>
@@ -101,10 +101,10 @@
         <version>3.2.4</version>
         <executions>
           <execution>
-            <phase>package</phase>
             <goals>
               <goal>shade</goal>
             </goals>
+            <phase>package</phase>
             <configuration>
               <artifactSet>
                 <includes>
@@ -153,10 +153,10 @@
         <executions>
           <execution>
             <id>flatten</id>
-            <phase>package</phase>
             <goals>
               <goal>flatten</goal>
             </goals>
+            <phase>package</phase>
           </execution>
         </executions>
       </plugin>
