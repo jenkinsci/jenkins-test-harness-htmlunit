@@ -100,6 +100,7 @@
 
   <build>
     <plugins>
+      <!-- TODO When the minimum Jenkins baseline is bumped past 2.357, this can be deleted. -->
       <plugin>
         <artifactId>maven-enforcer-plugin</artifactId>
         <executions>
@@ -186,6 +187,7 @@
     </plugins>
   </build>
 
+  <!-- TODO When the minimum Jenkins baseline is bumped past 2.357, this can be deleted. -->
   <profiles>
     <profile>
       <id>jdk-8-and-below</id>
