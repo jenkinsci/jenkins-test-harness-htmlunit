@@ -75,6 +75,10 @@
           <groupId>org.eclipse.jetty.websocket</groupId>
           <artifactId>websocket-client</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>xml-apis</groupId>
+          <artifactId>xml-apis</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -137,6 +141,7 @@
                   <include>org.apache.commons:commons-lang3</include>
                   <include>org.apache.commons:commons-text</include>
                   <include>xalan:xalan</include>
+                  <include>xalan:serializer</include>
                   <include>xerces:xercesImpl</include>
                 </includes>
               </artifactSet>
