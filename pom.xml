@@ -41,7 +41,7 @@
     <dependency>
       <groupId>net.sourceforge.htmlunit</groupId>
       <artifactId>htmlunit</artifactId>
-      <version>2.67.0</version>
+      <version>2.70.0</version>
       <exclusions>
         <exclusion>
           <groupId>com.google.code.findbugs</groupId>
@@ -74,10 +74,6 @@
         <exclusion>
           <groupId>org.eclipse.jetty.websocket</groupId>
           <artifactId>websocket-client</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>xml-apis</groupId>
-          <artifactId>xml-apis</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -121,9 +117,6 @@
                   <include>org.apache.httpcomponents:*</include>
                   <include>org.apache.commons:commons-lang3</include>
                   <include>org.apache.commons:commons-text</include>
-                  <include>xalan:xalan</include>
-                  <include>xalan:serializer</include>
-                  <include>xerces:xercesImpl</include>
                 </includes>
               </artifactSet>
               <promoteTransitiveDependencies>true</promoteTransitiveDependencies>
@@ -133,24 +126,6 @@
                   <shadedPattern>hidden.jth.org.apache.http</shadedPattern>
                 </relocation>
               </relocations>
-              <filters>
-                <filter>
-                  <artifact>xalan:xalan</artifact>
-                  <excludes>
-                    <!-- disable Xalan-J JAXP registration -->
-                    <exclude>META-INF/services/javax.xml.*</exclude>
-                  </excludes>
-                </filter>
-                <filter>
-                  <artifact>xerces:xercesImpl</artifact>
-                  <excludes>
-                    <!-- disable Xerces JAXP registration -->
-                    <exclude>META-INF/services/javax.xml.*</exclude>
-                    <exclude>META-INF/services/org.w3c.*</exclude>
-                    <exclude>META-INF/services/org.xml.*</exclude>
-                  </excludes>
-                </filter>
-              </filters>
               <createSourcesJar>true</createSourcesJar>
               <shadeSourcesContent>true</shadeSourcesContent>
             </configuration>
@@ -167,6 +142,36 @@
               <goal>flatten</goal>
             </goals>
             <phase>package</phase>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>display-info</id>
+            <configuration>
+              <rules>
+                <!--
+                  HtmlUnit attempts to detect the Java API for XML Processing (JAXP) implementation in use and do some
+                  optimizations if it is Xerces. In production, Jenkins core (and any plugins that do not bundle a JAXP
+                  implementation) will be using the built-in version of Xerces under the
+                  "com.sun.org.apache.xerces.internal" package namespace, and HtmlUnit's attempts to load that class
+                  will fail on Java 17 because the module is not open to HtmlUnit. While we could solve the problem by
+                  bundling Xerces as a library under the "org.apache.xerces" package namespace, this would make the test
+                  environment less like the production environment. Therefore, we opt to keep the test environment as
+                  close to the production environment as possible by using the built-in version of Xerces rather than a
+                  bundled version, even though this means that HtmlUnit won't be able to do its Xerces-specific
+                  optimizations when running on Java 17.
+                -->
+                <bannedDependencies>
+                  <excludes combine.children="append">
+                    <exclude>xalan</exclude>
+                    <exclude>xerces</exclude>
+                  </excludes>
+                </bannedDependencies>
+              </rules>
+            </configuration>
           </execution>
         </executions>
       </plugin>
