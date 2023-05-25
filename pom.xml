@@ -124,7 +124,6 @@
             <configuration>
               <artifactSet>
                 <includes>
-                  <include>org.htmlunit:*</include>
                   <include>org.apache.httpcomponents:*</include>
                   <include>org.apache.commons:commons-lang3</include>
                   <include>org.apache.commons:commons-text</include>
