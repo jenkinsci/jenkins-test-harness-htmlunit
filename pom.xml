@@ -21,7 +21,7 @@
     <!-- Uses HtmlUnit license. -->
     <license>
       <name>Apache 2</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+      <url>https://www.apache.org/licenses/LICENSE-2.0</url>
     </license>
   </licenses>
 
@@ -39,9 +39,9 @@
 
   <dependencies>
     <dependency>
-      <groupId>net.sourceforge.htmlunit</groupId>
+      <groupId>org.htmlunit</groupId>
       <artifactId>htmlunit</artifactId>
-      <version>2.70.0</version>
+      <version>3.2.0</version>
       <exclusions>
         <exclusion>
           <groupId>com.google.code.findbugs</groupId>
@@ -124,7 +124,7 @@
             <configuration>
               <artifactSet>
                 <includes>
-                  <include>net.sourceforge.htmlunit:*</include>
+                  <include>org.htmlunit:*</include>
                   <include>org.apache.httpcomponents:*</include>
                   <include>org.apache.commons:commons-lang3</include>
                   <include>org.apache.commons:commons-text</include>
