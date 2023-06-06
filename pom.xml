@@ -11,7 +11,7 @@
 
   <groupId>org.jenkins-ci.main</groupId>
   <artifactId>jenkins-test-harness-htmlunit</artifactId>
-  <version>${changelist}</version>
+  <version>144.v5c640e68276e</version>
 
   <name>HtmlUnit dependency for Jenkins Test Harness</name>
   <description>Encapsulates HtmlUnit dependency, shading conflicting dependencies.</description>
