@@ -35,6 +35,7 @@
   <properties>
     <changelist>999999-SNAPSHOT</changelist>
     <gitHubRepo>jenkinsci/${project.artifactId}</gitHubRepo>
+    <spotless.check.skip>false</spotless.check.skip>
   </properties>
 
   <dependencies>
@@ -43,6 +44,7 @@
       <artifactId>htmlunit</artifactId>
       <version>3.3.0</version>
       <exclusions>
+        <!-- Not needed at runtime -->
         <exclusion>
           <groupId>com.google.code.findbugs</groupId>
           <artifactId>jsr305</artifactId>
@@ -52,16 +54,15 @@
           <groupId>commons-codec</groupId>
           <artifactId>commons-codec</artifactId>
         </exclusion>
-        <!-- Provided by Jenkins core -->
         <exclusion>
           <groupId>commons-io</groupId>
           <artifactId>commons-io</artifactId>
         </exclusion>
-        <!-- Provided by Jenkins core -->
         <exclusion>
           <groupId>commons-logging</groupId>
           <artifactId>commons-logging</artifactId>
         </exclusion>
+        <!-- Provided by Jenkins test harness -->
         <exclusion>
           <groupId>org.eclipse.jetty</groupId>
           <artifactId>jetty-client</artifactId>
@@ -122,18 +123,43 @@
             </goals>
             <phase>package</phase>
             <configuration>
-              <artifactSet>
-                <includes>
-                  <include>org.apache.httpcomponents:*</include>
-                  <include>org.apache.commons:commons-lang3</include>
-                  <include>org.apache.commons:commons-text</include>
-                </includes>
-              </artifactSet>
               <promoteTransitiveDependencies>true</promoteTransitiveDependencies>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ComponentsXmlResourceTransformer" />
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+              </transformers>
+              <!--
+                This list should contain all packages in the transitive closure of this module except for those provided
+                by Jenkins core or test harness (and therefore excluded above) as well as HtmlUnit itself.
+              -->
               <relocations>
+                <relocation>
+                  <pattern>com.shapesecurity</pattern>
+                  <shadedPattern>hidden.jth.com.shapesecurity</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>mozilla</pattern>
+                  <shadedPattern>hidden.jth.mozilla</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>netscape</pattern>
+                  <shadedPattern>hidden.jth.netscape</shadedPattern>
+                </relocation>
                 <relocation>
                   <pattern>org.apache.http</pattern>
                   <shadedPattern>hidden.jth.org.apache.http</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>org.apache.commons.lang3</pattern>
+                  <shadedPattern>hidden.jth.org.apache.commons.lang3</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>org.apache.commons.text</pattern>
+                  <shadedPattern>hidden.jth.org.apache.commons.text</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>org.brotli</pattern>
+                  <shadedPattern>hidden.jth.org.brotli</shadedPattern>
                 </relocation>
               </relocations>
               <createSourcesJar>true</createSourcesJar>
