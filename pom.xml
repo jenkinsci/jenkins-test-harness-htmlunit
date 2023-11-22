@@ -42,7 +42,7 @@
     <dependency>
       <groupId>org.htmlunit</groupId>
       <artifactId>htmlunit</artifactId>
-      <version>3.7.0</version>
+      <version>3.9.0-SNAPSHOT</version>
       <exclusions>
         <!-- Not needed at runtime -->
         <exclusion>
@@ -100,6 +100,17 @@
     <repository>
       <id>repo.jenkins-ci.org</id>
       <url>https://repo.jenkins-ci.org/public/</url>
+    </repository>
+    <repository>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+      <id>OSS Sonatype snapshots</id>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
     </repository>
   </repositories>
 
