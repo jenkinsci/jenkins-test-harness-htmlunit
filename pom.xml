@@ -154,6 +154,10 @@
                   <shadedPattern>hidden.jth.org.apache.commons.lang3</shadedPattern>
                 </relocation>
                 <relocation>
+                  <pattern>org.apache.commons.net</pattern>
+                  <shadedPattern>hidden.jth.org.apache.commons.net</shadedPattern>
+                </relocation>
+                <relocation>
                   <pattern>org.apache.commons.text</pattern>
                   <shadedPattern>hidden.jth.org.apache.commons.text</shadedPattern>
                 </relocation>
