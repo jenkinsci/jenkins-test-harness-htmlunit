@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.jenkins-ci</groupId>
     <artifactId>jenkins</artifactId>
-    <version>1.115</version>
+    <version>1.116</version>
     <relativePath />
   </parent>
 
@@ -36,6 +36,8 @@
     <changelist>999999-SNAPSHOT</changelist>
     <gitHubRepo>jenkinsci/${project.artifactId}</gitHubRepo>
     <spotless.check.skip>false</spotless.check.skip>
+    <!-- TODO until a critical mass of plugins has migrated to Java 17 -->
+    <maven.compiler.release>11</maven.compiler.release>
   </properties>
 
   <dependencies>
