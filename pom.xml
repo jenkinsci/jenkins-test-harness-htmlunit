@@ -42,7 +42,7 @@
     <dependency>
       <groupId>org.htmlunit</groupId>
       <artifactId>htmlunit</artifactId>
-      <version>4.7.0</version>
+      <version>4.8.0-SNAPSHOT</version>
       <exclusions>
         <!-- Provided by Jenkins core -->
         <exclusion>
@@ -71,6 +71,11 @@
       <id>repo.jenkins-ci.org</id>
       <url>https://repo.jenkins-ci.org/public/</url>
     </repository>
+    <repository>
+      <id>htmlunit-snapshots</id>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+    </repository>
+
   </repositories>
 
   <pluginRepositories>
