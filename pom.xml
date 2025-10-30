@@ -36,6 +36,8 @@
     <changelist>999999-SNAPSHOT</changelist>
     <gitHubRepo>jenkinsci/${project.artifactId}</gitHubRepo>
     <spotless.check.skip>false</spotless.check.skip>
+    <!-- Conflict between shade and sources plugin, sources are still produced -->
+    <maven.source.skip>true</maven.source.skip>
   </properties>
 
   <dependencies>
