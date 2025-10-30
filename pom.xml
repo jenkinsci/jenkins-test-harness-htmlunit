@@ -36,6 +36,8 @@
     <changelist>999999-SNAPSHOT</changelist>
     <gitHubRepo>jenkinsci/${project.artifactId}</gitHubRepo>
     <spotless.check.skip>false</spotless.check.skip>
+    <!-- Conflict between shade and sources plugin, sources are still produced -->
+    <maven.source.skip>true</maven.source.skip>
   </properties>
 
   <dependencies>
@@ -98,6 +100,15 @@
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ComponentsXmlResourceTransformer" />
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
               </transformers>
+              <filters>
+                <filter>
+                  <artifact>org.htmlunit:htmlunit</artifact>
+                  <excludes>
+                    <exclude>org/htmlunit/javascript/polyfill/fetch/LICENSE</exclude>
+                    <exclude>org/htmlunit/javascript/polyfill/fetch/fetch.umd.js</exclude>
+                  </excludes>
+                </filter>
+              </filters>
               <!--
                 This list should contain all packages in the transitive closure of this module except for those provided
                 by Jenkins core or test harness (and therefore excluded above) as well as HtmlUnit itself.
